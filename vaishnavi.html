@@ -1,0 +1,84 @@
+<html>
+<head>
+    <title>add and remove button</title>
+</head>
+<body>
+    <script type="text/javascript">
+        window.onload = function () {
+            
+            var details = new Array();
+            details.push(["abin", "IT"]);
+            details.push(["apple", "CS"]);
+            details.push(["orange", "EE"]);
+            details.push(["Dates", "EC"]);
+ 
+            
+            for (var i = 0; i < details.length; i++) {
+                AddRow(details[i][0], details[i][1]);
+            }
+        };
+ 
+        function Add() {
+            var txtName = document.getElementById("txtName");
+            var txtdepartment = document.getElementById("txtdepartment");
+            AddRow(txtName.value, txtdepartment.value);
+            txtName.value = "";
+            txtdepartment.value = "";
+        };
+        function Remove(button) {
+            
+            var row = button.parentNode.parentNode;
+            var name = row.getElementsByTagName("TD")[0].innerHTML;
+             {
+ 
+                
+                var table = document.getElementById("tbldetails");
+ 
+                
+                table.deleteRow(row.rowIndex);
+            }
+        };
+ 
+        function AddRow(name, department) {
+            
+            var tBody = document.getElementById("tbldetails").getElementsByTagName("TBODY")[0];
+ 
+            
+            row = tBody.insertRow(-1);
+ 
+            //Add Name cell.
+            var cell = row.insertCell(-1);
+            cell.innerHTML = name;
+ 
+            //Add department cell.
+            cell = row.insertCell(-1);
+            cell.innerHTML = department;
+            //Add Button cell.
+            cell = row.insertCell(-1);
+            var btnRemove = document.createElement("INPUT");
+            btnRemove.type = "button";
+            btnRemove.value = "Remove";
+            btnRemove.setAttribute("onclick", "Remove(this);");
+            cell.appendChild(btnRemove);
+        }
+    </script>
+    <table id="tbldetails" cellpadding="0" cellspacing="0" border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>department</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td><input type="text" id="txtName" /></td>
+                <td><input type="text" id="txtdepartment" /></td>
+                <td><input type="button" onclick="Add()" value="Add" /></td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>
